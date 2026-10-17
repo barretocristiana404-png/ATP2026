@@ -1,0 +1,117 @@
+# Aplicação para manipulação de listas de inteiros
+import random
+
+def criaLista(N):
+    lista = []
+    for i in range(N):
+        lista.append(random.randint(1, 100))
+    return lista
+
+def leLista(N):
+    lista = []
+    for i in range(N):
+        num = int(input(f"Número {i + 1}: "))
+        lista.append(num)
+    return lista
+
+def somaLista(lista):
+    soma = 0
+    for elem in lista:
+        soma = soma + elem
+    return soma
+
+def mediaLista(lista):
+    return somaLista(lista) / len(lista)
+
+def maiorLista(lista):
+    maior = lista[0]
+    for elem in lista:
+        if elem > maior:
+            maior = elem
+    return maior
+
+def menorLista(lista):
+    menor = lista[0]
+    for elem in lista:
+        if elem < menor:
+            menor = elem
+    return menor
+
+def estaOrdenadaCD(lista, ordem):
+    for i in range(len(lista) - 1):
+        if ordem == "C" and lista[i] > lista[i + 1]:
+            return False
+        if ordem == "D" and lista[i] < lista[i + 1]:
+            return False
+    return True
+
+def indiceDe(lista, elem):
+    for i in range(len(lista)):
+        if lista[i] == elem:
+            return i + 1
+    return -1
+
+def mostraMenu():
+    print()
+    print("(1) Criar Lista")
+    print("(2) Ler Lista")
+    print("(3) Soma")
+    print("(4) Média")
+    print("(5) Maior")
+    print("(6) Menor")
+    print("(7) Está ordenada por ordem crescente?")
+    print("(8) Está ordenada por ordem decrescente?")
+    print("(9) Procurar um elemento")
+    print("(0) Sair")
+
+lista = [] 
+opcao = -1
+
+while opcao != 0:
+    mostraMenu()
+    opcao = int(input("Escolhe uma das opções acima: "))
+
+    if opcao == 1:
+        N = random.randint(2, 20)
+        lista = criaLista(N)
+        print("Lista:", lista)
+
+    elif opcao == 2:
+        N = int(input("Quantos números queres na tua lista?"))
+        lista = leLista(N)
+        print("Lista:", lista)
+
+    elif opcao >= 3 and opcao <= 9:
+        if len(lista) == 0:
+            print("A lista está vazia. Cria ou lê uma lista primeiro (opção 1 ou 2).")
+        elif opcao == 3:
+            print("Soma dos números:", somaLista(lista))
+        elif opcao == 4:
+            print("Média dos números:", mediaLista(lista))
+        elif opcao == 5:
+            print("Maior número:", maiorLista(lista))
+        elif opcao == 6:
+            print("Menor número:", menorLista(lista))
+        elif opcao == 7:
+            if estaOrdenadaCD(lista, "C"):
+                print("Sim, a lista está ordenada por ordem crescente.")
+            else:
+                print("Não, a lista não está ordenada por ordem crescente.")
+        elif opcao == 8:
+            if estaOrdenadaCD(lista, "D"):
+                print("Sim, a lista está ordenada por ordem decrescente.")
+            else:
+                print("Não, a lista não está ordenada por ordem decrescente.")
+        elif opcao == 9:
+            elem = int(input("Que elemento queres procurar? "))
+            posicao = indiceDe(lista, elem)
+            if posicao == -1:
+                print("Não está na lista")
+            else:
+                print("Posição:", posicao)
+
+    elif opcao == 0:
+        print("TERMINADO! Ultima lista registrada:", lista)
+
+    else:
+        print("Opção inválida.")
