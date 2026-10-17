@@ -1,0 +1,14 @@
+#Adivinhar o numero gerado 
+from random import randint
+ng = randint(0, 100)
+num1 = int(input("Qual foi numero gerado?: "))
+
+if num1 < 0:
+    print("O numero nao pode ser negativo")
+elif num1 > 100:
+    print("ATENCAO:O numero esta entre 0 e 100")
+elif num1 == ng:
+    print("Parabens, acertas-te!")
+
+else:
+    print("ERRASTE!\nO numero correto era", ng, "!")
